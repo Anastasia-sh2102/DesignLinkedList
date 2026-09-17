@@ -29,7 +29,7 @@ public class DesignLinkedList {
 
         private Node getNode(int index) {
             if (size == 0 || index < 0 || index >= size) {
-                throw new IndexOutOfBoundsException("invalid index");
+                return null;
             }
 
             Node curNode = head;
@@ -83,5 +83,13 @@ public class DesignLinkedList {
                 size--;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        MyLinkedList list = new MyLinkedList();
+        list.addAtHead(1);
+        list.deleteAtIndex(0);
+        list.addAtTail(2);
+        System.out.println(list.get(0));
     }
 }
