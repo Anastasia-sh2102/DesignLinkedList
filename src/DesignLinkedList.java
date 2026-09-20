@@ -1,5 +1,5 @@
 public class DesignLinkedList {
-    static class MyLinkedList {
+    class MyLinkedList {
         int size;
         Node head;
 
@@ -20,11 +20,13 @@ public class DesignLinkedList {
 
         public int get(int index) {
             Node curNode = head;
-            if (0 <= index && index < size) {
-                curNode = curNode.next;
-                return curNode.val;
+            if (index >= size) {
+                return -1;
             }
-            return -1;
+            for (int i = 1; i <= index; i++) {
+                curNode = curNode.next;
+            }
+            return curNode.val;
         }
 
         private Node getNode(int index) {
@@ -33,7 +35,7 @@ public class DesignLinkedList {
             }
 
             Node curNode = head;
-            for (int i = 0; i <= index; i++) {
+            for (int i = 1; i <= index; i++) {
                 curNode = curNode.next;
             }
             return curNode;
@@ -49,8 +51,12 @@ public class DesignLinkedList {
 
         public void addAtTail(int val) {
             Node newTail = new Node(val);
-            getNode(size - 1).next = newTail;
-            size++;
+            if (size == 0) {
+                addAtHead(val);
+            } else {
+                getNode(size - 1).next = newTail;
+                size++;
+            }
         }
 
         public void addAtIndex(int index, int val) {
@@ -58,7 +64,6 @@ public class DesignLinkedList {
             if (index < 0 || index > size) {
                 return;
             }
-
             if (index == size) {
                 addAtTail(val);
             }
@@ -86,10 +91,11 @@ public class DesignLinkedList {
     }
 
     public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList();
-        list.addAtHead(1);
-        list.deleteAtIndex(0);
-        list.addAtTail(2);
-        System.out.println(list.get(0));
+        DesignLinkedList iWantABreak = new DesignLinkedList();
+        MyLinkedList linkedList = new iWantABreak.MyLinkedList();
+        linkedList.addAtHead(1);
+        linkedList.deleteAtIndex(0);
+        linkedList.addAtTail(2);
+        System.out.println(linkedList.get(0));
     }
 }
