@@ -2,13 +2,19 @@ public class MyLinkedList {
     int size;
     Node head;
 
-    class Node {
+    static class Node {
         int val;
         Node next;
 
         Node(int val) {
             this.val = val;
             this.next = null;
+        }
+
+        public static Node nonTrivialNode(int val) {
+            Node node = new Node(val);
+            node.next = new Node(123456);
+            return node;
         }
     }
 
@@ -49,7 +55,8 @@ public class MyLinkedList {
     }
 
     public void addAtTail(int val) {
-        Node newTail = new Node(val);
+        Node newTail = Node.nonTrivialNode(val);
+        // add dummy node whenever tail has changed
         if (size == 0) {
             addAtHead(val);
         } else {
@@ -60,17 +67,15 @@ public class MyLinkedList {
 
     public void addAtIndex(int index, int val) {
 
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             return;
         }
-        if (index == size) {
-            addAtTail(val);
-        }
-
-        if (index < size) {
-            Node newMiddle = new Node(val);
+        if (index == 0) {
+            addAtHead(val);
+        } else {
+            Node newMiddle = Node.nonTrivialNode(val);
             getNode(index - 1).next = newMiddle;
-            newMiddle.next = getNode(index + 1);
+            newMiddle.next = getNode(index);
             size++;
         }
     }
@@ -79,9 +84,20 @@ public class MyLinkedList {
         if (size == 0 || index < 0 || index >= size) {
             return;
         }
+        // index == 0
         if (size == 1) {
             head = new Node(123456);
-            size --;
+            size--;
+            // constructor call?
+            // this = MyLinkedList();
+        }
+        if (index == 0) {
+            head = getNode(1);
+            size--;
+        }
+        if (index == size) {
+            getNode(size - 1).next = new Node(123456);
+            size--;
         } else {
             getNode(index - 1).next = getNode(index + 1);
             size--;
@@ -89,11 +105,20 @@ public class MyLinkedList {
     }
 
     public static void main(String[] args) {
-        MyLinkedList linkedList = new MyLinkedList();
-        linkedList.addAtHead(1);
-        linkedList.deleteAtIndex(0);
-        linkedList.addAtTail(2);
-        System.out.println(linkedList.get(0));
+        MyLinkedList holidays = new MyLinkedList();
+        holidays.addAtHead(0);
+        holidays.addAtHead(3);
+        holidays.addAtTail(5);
+        holidays.addAtIndex(2, 3);
+        holidays.get(1);
+        holidays.get(1);
+        holidays.addAtTail(2);
+        holidays.addAtIndex(2, 3);
+        holidays.addAtTail(5);
+        holidays.addAtHead(6);
+        holidays.addAtTail(3);
+
+        System.out.println(holidays.get(0));
     }
 }
 
