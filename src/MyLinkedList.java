@@ -88,14 +88,10 @@ public class MyLinkedList {
         if (size == 1) {
             head = new Node(123456);
             size--;
-            // constructor call?
-            // this = MyLinkedList();
-        }
-        if (index == 0) {
+        } else if (index == 0) {
             head = getNode(1);
             size--;
-        }
-        if (index == size) {
+        } else if (index == size) {
             getNode(size - 1).next = new Node(123456);
             size--;
         } else {
@@ -106,17 +102,10 @@ public class MyLinkedList {
 
     public static void main(String[] args) {
         MyLinkedList holidays = new MyLinkedList();
-        holidays.addAtHead(0);
-        holidays.addAtHead(3);
-        holidays.addAtTail(5);
-        holidays.addAtIndex(2, 3);
-        holidays.get(1);
-        holidays.get(1);
+        holidays.addAtHead(1);
+        holidays.deleteAtIndex(0);
         holidays.addAtTail(2);
-        holidays.addAtIndex(2, 3);
-        holidays.addAtTail(5);
-        holidays.addAtHead(6);
-        holidays.addAtTail(3);
+        holidays.get(0);
 
         System.out.println(holidays.get(0));
     }
