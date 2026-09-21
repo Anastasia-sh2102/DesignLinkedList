@@ -74,8 +74,8 @@ public class MyLinkedList {
             addAtHead(val);
         } else {
             Node newMiddle = Node.nonTrivialNode(val);
-            getNode(index - 1).next = newMiddle;
             newMiddle.next = getNode(index);
+            getNode(index - 1).next = newMiddle;
             size++;
         }
     }
